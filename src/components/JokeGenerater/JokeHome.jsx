@@ -31,7 +31,7 @@ function JokeHome() {
   return (
     <>
       <section className="min-h-screen bg-gradient-to-r from-yellow-400 to-yellow-800 flex flex-col justify-center items-center" > 
-      <h1 className="font-bold text-3xl mb-10">AI Joke Generator</h1>
+      <h1 className="font-bold text-3xl mb-10">AI JOKE GENERATOR</h1>
 <div className="bg-black max-w-xl drop-shadow-2xl rounded-lg text-white p-10 flex flex-col items-center justify-center space-y-5">
 
 <div className=" text-center ">
