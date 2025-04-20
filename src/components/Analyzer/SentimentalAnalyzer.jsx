@@ -5,21 +5,23 @@ function SentimentalAnalyzer() {
   const [review, setReview] = useState("");
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [option, setOption] = useState(false);
   const analyzeSentiment = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const data = await analyzeSentimentWithGemini(review);
+      
       setReviews([
-        ...reviews,
+        
         {
           text: review,
-          sentiment: data,
-          emoji: data,
-          explanation: data,
+          sentiment: data.sentiment,
+          emoji: data.emoji,
+          explanation: data.explanation,
           timestamp: new Date().toLocaleString(),
         },
+        ...reviews,
       ]);
       setReview("");
     } catch (error) {
@@ -50,21 +52,43 @@ function SentimentalAnalyzer() {
             </button>
           </div>
         </form>
-        <div className="grid">
+        <div className="grid gap-4">
           {reviews.map((items,index)=>(
           <>
             <div key={index} className="bg-white/10 p-5 rounded-lg backdrop-blur-xl">
-              <div className="flex ietms-center justify-between mb-5">
-                <span>😊</span>
-                <span>NEGATIVE</span>
+              <div className="flex items-center justify-between mb-5">
+                <span className="text-4xl">{items.emoji}</span>
+
+                <span className={`px-4 py-1 rounded-full ${
+                    items.sentiment === 'POSITIVE'? 'bg-green-500/60 text-green-300':
+                    items.sentiment === 'NEGATIVE'? 'bg-red-500/60 text-red-300':
+                    'bg-yellow-500/60 text-yellow-300'
+                }`}>{items.sentiment}</span>
+
+
               </div>
-              <p>text</p>
-              <p>explanation</p>
-              <p>timestamp</p>
+              <p className="text-black mb-5">{items.text}</p>
+              <p className="text-blue-800 text-xs"> {items.explanation}</p>
+              <p className="text-gray-600 text-xs mt-5">{items.timestamp}</p>
             </div>
           </>
         ))} 
         </div>
+
+
+
+<div>
+    <h1>drop down</h1>
+    <select
+    onChange={(e)=>{setOption(e.target.value)}}
+    value={option}
+    >
+    <option value=""> choose an Option</option>
+        <option value="Linkdin"> Linkdin</option>
+        <option value="Facebook"> Facebook</option>
+        <option value="Instagram"> Instagram</option>
+    </select>
+</div>
       </div>
     </section>
   );
