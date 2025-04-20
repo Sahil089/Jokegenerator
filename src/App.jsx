@@ -1,5 +1,6 @@
+import SentimentalAnalyzer from "./components/Analyzer/SentimentalAnalyzer"
 
-import JokeHome from "./components/JokeGenerater/JokeHome"
+
 
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <>
-    <JokeHome/>
+<SentimentalAnalyzer/>
     </>
 
   )
